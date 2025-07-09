@@ -37,6 +37,12 @@ A powerful framework for building and managing AI agents with context awareness.
 
 - [Features](#features)
 - [Installation](#installation)
+- [Project Structure](#project-structure)
+- [Development](#development)
+  - [Setting Up](#setting-up)
+  - [Running Tests](#running-tests)
+  - [Code Quality](#code-quality)
+  - [CI/CD](#cicd)
 - [Usage](#usage)
   - [Core Concepts](#core-concepts)
   - [Creating an Agent](#creating-an-agent)
@@ -45,6 +51,94 @@ A powerful framework for building and managing AI agents with context awareness.
 - [API Reference](#api-reference)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Project Structure
+
+```
+context-engineering-framework/
+├── .github/                    # GitHub Actions workflows
+│   └── workflows/
+│       └── ci.yml             # CI/CD pipeline
+├── docs/                       # Documentation
+├── examples/                   # Example usage
+├── src/                        # Source code
+│   ├── context_engineering_framework/
+│   │   ├── core/              # Core framework components
+│   │   │   ├── __init__.py
+│   │   │   ├── agent.py       # Base agent implementation
+│   │   │   ├── context.py     # Context management
+│   │   │   └── tools.py       # Tool system
+│   │   └── cli/               # Command-line interface
+│   │       ├── __init__.py
+│   │       └── main.py
+│   └── tests/                 # Test suite
+│       ├── core/              # Tests for core components
+│       │   ├── test_agent.py
+│       │   ├── test_context.py
+│       │   └── test_tools.py
+│       └── conftest.py        # Test configuration
+├── .pre-commit-config.yaml    # Pre-commit hooks
+├── Makefile                   # Common development tasks
+├── pyproject.toml            # Project metadata and dependencies
+└── README.md                 # This file
+```
+
+## Development
+
+### Setting Up
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/context-engineering-framework.git
+   cd context-engineering-framework
+   ```
+
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install the package in development mode with all dependencies:
+   ```bash
+   pip install -e '.[dev]'
+   ```
+
+4. Install pre-commit hooks:
+   ```bash
+   pre-commit install
+   ```
+
+### Running Tests
+
+Run all tests with coverage:
+```bash
+make test
+```
+
+Run a specific test file:
+```bash
+pytest tests/core/test_agent.py -v
+```
+
+### Code Quality
+
+Format code:
+```bash
+make format
+```
+
+Run linters:
+```bash
+make lint
+```
+
+### CI/CD
+
+The project uses GitHub Actions for continuous integration. The workflow includes:
+- Running tests on multiple Python versions
+- Code coverage reporting
+- Linting and type checking
 
 ## Features
 

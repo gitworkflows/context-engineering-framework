@@ -1,4 +1,4 @@
-""
+"""
 Setup script for the Context Engineering Framework.
 
 This script allows the package to be installed with pip.

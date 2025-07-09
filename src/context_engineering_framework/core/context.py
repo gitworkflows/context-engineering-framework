@@ -77,21 +77,16 @@ class ContextManager:
             raise ValueError(f"Failed to load context from {file_path}: {str(e)}")
     
     def merge_contexts(self) -> Dict[str, Any]:
-        """Merge all context sources based on priority."""
-        # Sort sources by priority (highest first)
-        sorted_sources = sorted(
-            self.sources, 
-            key=lambda x: x.priority, 
-            reverse=True
-        )
+        """Merge all context sources into a single context dictionary.
         
-        # Merge contexts, with higher priority sources overriding lower ones
+        Higher priority sources override lower priority ones.
+        """
         merged = {}
-        for source in sorted_sources:
+        # Sort sources by priority in descending order (highest first)
+        for source in sorted(self.sources, key=lambda x: x.priority, reverse=True):
             self._deep_merge(merged, source.content)
-            
         self.context = merged
-        return self.context
+        return merged
     
     def _deep_merge(self, target: Dict[str, Any], source: Dict[str, Any]) -> None:
         """Recursively merge source dictionary into target."""

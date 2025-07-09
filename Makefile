@@ -18,7 +18,7 @@ install:
 
 # Run tests
 test:
-	$(PYTEST) tests/ -v --cov=src --cov-report=term-missing
+	$(PYTEST) tests/ -v --cov=src --cov-report=term-missing --cov-report=xml
 
 # Run linters
 lint:
