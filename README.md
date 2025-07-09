@@ -1,53 +1,206 @@
-# Context Engineering Template
+# Context Engineering Framework
 
-A comprehensive template for getting started with Context Engineering - the discipline of engineering context for AI coding assistants so they have the information necessary to get the job done end to end.
+A powerful framework for building and managing AI agents with context awareness. This framework provides the foundation for creating intelligent agents that can understand, process, and act upon contextual information.
 
-> **Context Engineering is 10x better than prompt engineering and 100x better than vibe coding.**
+> **Context is the key to building truly intelligent AI systems.**
 
 ## 🚀 Quick Start
 
-```bash
-# 1. Clone this template
-git clone https://github.com/coleam00/Context-Engineering-Intro.git
-cd Context-Engineering-Intro
+1. **Install the package** (in development mode):
+   ```bash
+   # Clone the repository
+   git clone https://github.com/yourusername/context-engineering-framework.git
+   cd context-engineering-framework
+   
+   # Create and activate a virtual environment
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   
+   # Install the package in development mode
+   pip install -e .
+   
+   # Install development dependencies
+   pip install -e ".[dev]"
+   ```
 
-# 2. Set up your project rules (optional - template provided)
-# Edit CLAUDE.md to add your project-specific guidelines
-
-# 3. Add examples (highly recommended)
-# Place relevant code examples in the examples/ folder
-
-# 4. Create your initial feature request
-# Edit INITIAL.md with your feature requirements
-
-# 5. Generate a comprehensive PRP (Product Requirements Prompt)
-# In Claude Code, run:
-/generate-prp INITIAL.md
-
-# 6. Execute the PRP to implement your feature
-# In Claude Code, run:
-/execute-prp PRPs/your-feature-name.md
-```
+2. **Run the CLI**:
+   ```bash
+   # Start the interactive shell
+   cef run
+   
+   # Or use individual commands
+   cef read README.md
+   cef write example.txt "Hello, world!"
+   ```
 
 ## 📚 Table of Contents
 
-- [What is Context Engineering?](#what-is-context-engineering)
-- [Template Structure](#template-structure)
-- [Step-by-Step Guide](#step-by-step-guide)
-- [Writing Effective INITIAL.md Files](#writing-effective-initialmd-files)
-- [The PRP Workflow](#the-prp-workflow)
-- [Using Examples Effectively](#using-examples-effectively)
-- [Best Practices](#best-practices)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Core Concepts](#core-concepts)
+  - [Creating an Agent](#creating-an-agent)
+  - [Using Tools](#using-tools)
+  - [Context Management](#context-management)
+- [API Reference](#api-reference)
+- [Contributing](#contributing)
+- [License](#license)
 
-## What is Context Engineering?
+## Features
 
-Context Engineering represents a paradigm shift from traditional prompt engineering:
+- **Agent Framework**: Create and manage AI agents with custom behaviors
+- **Tool System**: Build and use tools with input/output validation
+- **Context Management**: Handle and merge context from multiple sources
+- **CLI Interface**: Interact with the framework through a command-line interface
+- **Extensible**: Easily add new agents, tools, and functionality
+- **Type Annotations**: Full type hints for better development experience
 
-### Prompt Engineering vs Context Engineering
+## Installation
 
-**Prompt Engineering:**
-- Focuses on clever wording and specific phrasing
-- Limited to how you phrase a task
+### Prerequisites
+- Python 3.8 or higher
+- pip (Python package manager)
+
+### From Source
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/context-engineering-framework.git
+   cd context-engineering-framework
+   ```
+
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install the package:
+   ```bash
+   pip install -e .
+   ```
+
+### Development Setup
+
+For development, install the development dependencies:
+
+```bash
+pip install -e ".[dev]"
+```
+
+## Usage
+
+### Core Concepts
+
+The framework is built around several key concepts:
+
+- **Agents**: Autonomous entities that can process information and perform actions
+- **Tools**: Functions that agents can use to interact with the world
+- **Context**: Information that agents use to make decisions
+- **Messages**: Communication between agents and users
+
+### Creating an Agent
+
+```python
+from src import BaseAgent
+
+# Create a simple agent
+agent = BaseAgent(name="DemoAgent", description="A demonstration agent")
+
+# Process a message
+response = await agent.process("Hello, world!")
+print(response)
+```
+
+### Using Tools
+
+```python
+from src import BaseAgent, Tool
+
+# Define a tool
+def greet(name: str) -> str:
+    """Greet someone by name."""
+    return f"Hello, {name}!"
+
+# Create an agent and add the tool
+agent = BaseAgent(name="GreetingAgent")
+agent.add_tool(greet)
+
+# The agent can now use the tool
+response = await agent.process("Greet Alice")
+print(response)
+```
+
+### Context Management
+
+```python
+from src import ContextManager
+
+# Create a context manager
+ctx_mgr = ContextManager()
+
+# Add context from different sources
+ctx_mgr.add_source("defaults", {"app": {"name": "DemoApp", "version": "1.0.0"}})
+ctx_mgr.add_source("user_prefs", {"theme": "dark", "notifications": True}, priority=10)
+
+# Merge contexts
+context = ctx_mgr.merge_contexts()
+print(context)
+```
+
+## API Reference
+
+### BaseAgent
+
+The core agent class that provides the foundation for all agents.
+
+#### Methods
+
+- `process(input_text: str, **kwargs) -> str`: Process an input message and return a response
+- `add_tool(tool: Union[Tool, Callable], **kwargs)`: Add a tool to the agent
+- `remove_tool(name: str) -> bool`: Remove a tool by name
+- `get_tool(name: str) -> Optional[Tool]`: Get a tool by name
+- `list_tools() -> List[Dict[str, Any]]`: List all available tools
+- `set_context(context: Dict[str, Any])`: Set the agent's context
+- `get_context(key: str = None, default: Any = None)`: Get a value from the agent's context
+- `reset()`: Reset the agent's conversation and state
+
+### ContextManager
+
+Manages context from multiple sources with priority-based merging.
+
+#### Methods
+
+- `add_source(name: str, content: Dict[str, Any], **kwargs)`: Add a context source
+- `load_from_file(file_path: str, **kwargs)`: Load context from a JSON or YAML file
+- `merge_contexts() -> Dict[str, Any]`: Merge all context sources based on priority
+- `get_context(key: str = None, default: Any = None)`: Get a value from the merged context
+- `validate_context(schema: Dict[str, Any]) -> bool`: Validate the context against a schema
+
+### Tool
+
+Base class for all tools.
+
+#### Methods
+
+- `validate_input(input_data: Dict[str, Any]) -> ToolInput`: Validate input data
+- `validate_output(output_data: Dict[str, Any]) -> ToolOutput`: Validate output data
+- `execute(**kwargs) -> ToolOutput`: Execute the tool with the given arguments
+- `get_schema() -> Dict[str, Any]`: Get the OpenAPI schema for the tool
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a new branch for your feature or bugfix
+3. Make your changes and add tests
+4. Run the tests: `pytest`
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 - Like giving someone a sticky note
 
 **Context Engineering:**

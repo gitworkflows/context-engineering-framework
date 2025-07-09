@@ -1,0 +1,112 @@
+# .readthedocs.yml
+# Read the Docs configuration file
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+# Required
+version: 2
+
+# Build documentation in the docs/ directory with Sphinx
+sphinx:
+  configuration: docs/conf.py
+
+# Optionally build your docs in additional formats such as PDF
+formats:
+  - pdf
+  - epub
+
+# Optionally set the version of Python and requirements required to build your docs
+python:
+  version: "3.8"
+  install:
+    - requirements: docs/requirements.txt
+    - method: pip
+      path: .
+      extra_requirements:
+        - docs
+
+# Optionally build documentation for multiple versions of your project
+tags:
+  - latest
+  - stable
+
+# Optionally include additional paths in the build
+tools:
+  python: "3.8"
+
+# Optionally specify the conda environment file path
+# conda:
+#   environment: docs/environment.yml
+
+# Optionally specify the path to your requirements file
+# requirements:
+#   - docs/requirements.txt
+
+# Optionally specify the path to your documentation root
+# doc_path: docs/
+
+# Optionally specify the path to your source code
+# source_dir: src/
+
+# Optionally specify the path to your build directory
+# build_dir: _build/
+
+# Optionally specify the path to your requirements file
+# requirements_file: requirements.txt
+
+# Optionally specify the path to your pip requirements file
+# pip_requirements: requirements.txt
+
+# Optionally specify the path to your conda environment file
+# conda_environment: environment.yml
+
+# Optionally specify the path to your setup.py file
+# setup_py_install: true
+
+# Optionally specify the path to your setup.cfg file
+# setup_cfg: setup.cfg
+
+# Optionally specify the path to your pyproject.toml file
+# pyproject: pyproject.toml
+
+# Optionally specify the path to your requirements directory
+# requirements:
+#   - requirements.txt
+
+# Optionally specify the path to your docs requirements file
+# docs_requirements: docs/requirements.txt
+
+# Optionally specify the path to your test requirements file
+# test_requirements: tests/requirements.txt
+
+# Optionally specify the path to your dev requirements file
+# dev_requirements: dev-requirements.txt
+
+# Optionally specify the path to your docs source directory
+# docs_dir: docs/source
+
+# Optionally specify the path to your docs build directory
+# docs_build_dir: docs/_build
+
+# Optionally specify the path to your docs configuration file
+# docs_conf: docs/conf.py
+
+# Optionally specify the path to your docs index file
+# docs_index: docs/index.rst
+
+# Optionally specify the path to your docs requirements file
+# docs_requirements: docs/requirements.txt
+
+# Optionally specify the path to your docs environment file
+# docs_environment: docs/environment.yml
+
+# Optionally specify the path to your docs Makefile
+# docs_makefile: docs/Makefile
+
+# Optionally specify the path to your docs make.bat file
+# docs_makebat: docs/make.bat
+
+# Optionally specify the path to your docs makefile
+# docs_makefile: docs/Makefile
+
+# Optionally specify the path to your docs make.bat file
+# docs_makebat: docs/make.bat
